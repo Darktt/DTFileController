@@ -1,13 +1,13 @@
 // DTFileController.m
-//
-// Copyright (c) 2013年 Darktt
+// 
+// Copyright (c) 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-//
+// 
 //   http://www.apache.org/licenses/LICENSE-2.0
-//
+// 
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -120,7 +120,7 @@ static DTFileController *singleton = nil;
 {
     NSNumber *currentSpace = [self checkStorageSpace];
     
-    //    NSLog(@"Free : %@, File Size : %@", currentSpace, size);
+//    NSLog(@"Free : %@, File Size : %@", currentSpace, size);
     
     return ([currentSpace longLongValue] > [size longLongValue]) ? YES : NO;
 }
@@ -153,7 +153,7 @@ static DTFileController *singleton = nil;
 #endif
     
     NSString *documentPath = [paths objectAtIndex:0];
-    
+
     return documentPath;
 }
 
@@ -175,7 +175,7 @@ static DTFileController *singleton = nil;
 #endif
     
     NSString *cachesPath = [paths objectAtIndex:0];
-    
+
     return cachesPath;
 }
 
@@ -216,7 +216,7 @@ static DTFileController *singleton = nil;
     NSLog(@"Read Path: %@",filePath);
     
 #endif
-    
+
     if ([self fileExistAtPath:filePath]) {
         NSString *string = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:nil];
         return string;
@@ -302,7 +302,7 @@ static DTFileController *singleton = nil;
 
 - (BOOL)createDirectoryUnderDocumentWithDirectoryName:(NSString *)directory
 {
-    
+
     NSString *folderPathUnderDocument = [[self documentPath] stringByAppendingPathComponent:directory];
     
 #ifdef DEBUG_MODE
@@ -463,6 +463,11 @@ static DTFileController *singleton = nil;
 
 - (BOOL)copyFileAtPath:(NSString *)path toPath:(NSString *)toPath
 {
+    // If destination path same to origin path, abort it.
+    if ([path isEqualToString:toPath]) {
+        return NO;
+    }
+    
     NSError *error = nil;
     BOOL isCopy = [[NSFileManager defaultManager] copyItemAtPath:path toPath:toPath error:&error];
     
@@ -475,6 +480,11 @@ static DTFileController *singleton = nil;
 
 - (void)copyFileUseBlockAtPath:(NSString *)path toPath:(NSString *)toPath progressBlock:(DTFileProgressBlock)progressBlock completeBlock:(DTFileOperationBlock)completeBlock
 {
+    // If destination path same to origin path, abort it.
+    if ([path isEqualToString:toPath]) {
+        return;
+    }
+    
     NSFileHandle *sourceFile = [NSFileHandle fileHandleForReadingAtPath:path];
     
     if (sourceFile == nil) {
@@ -498,7 +508,7 @@ static DTFileController *singleton = nil;
     }
     
     QueueBlock copyQueueBlock = ^(){
-        
+    
         NSUInteger offset = 0;
         NSUInteger chunkSize = 1024 * 100;
         long long size = [[self getFileInformationAtPath:path] fileSize];
@@ -551,6 +561,11 @@ static DTFileController *singleton = nil;
 
 - (BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath
 {
+    // If destination path same to origin path, abort it.
+    if ([path isEqualToString:toPath]) {
+        return NO;
+    }
+    
     NSError *error = nil;
     BOOL isMove = [[NSFileManager defaultManager] moveItemAtPath:path toPath:toPath error:&error];
     
@@ -563,6 +578,11 @@ static DTFileController *singleton = nil;
 
 - (void)moveFileUseBlockAtPath:(NSString *)path toPath:(NSString *)toPath progressBlock:(DTFileProgressBlock)progressBlock completeBlock:(DTFileOperationBlock)completeBlock
 {
+    // If destination path same to origin path, abort it.
+    if ([path isEqualToString:toPath]) {
+        return;
+    }
+    
     [self copyFileUseBlockAtPath:path toPath:toPath progressBlock:progressBlock completeBlock:^(BOOL operationDone, NSError *error) {
         if (operationDone) {
             [self removeFileAtPath:path];
