@@ -407,18 +407,29 @@ static DTFileController *singleton = nil;
 
 #pragma mark - Get File List In Directory
 
-- (NSArray *)filesOfCurrentDirectoryName:(NSString *)directoryName
+- (NSArray *)filesOfCurrentDirectoryName:(NSString *)directoryName skipHiddenFile:(BOOL)skipHiddenFile
 {
     NSString *path = [self currentApplicationPathWithFileName:directoryName];
-    NSArray *files = [self filesWithDirectoryPath:path];
+    NSArray *files = [self filesWithDirectoryPath:path skipHiddenFile:skipHiddenFile];
     
     return files;
 }
 
-- (NSArray *)filesWithDirectoryPath:(NSString *)path
+- (NSArray *)filesWithDirectoryPath:(NSString *)path skipHiddenFile:(BOOL)skipHiddenFile
 {
     NSError *error = nil;
-    NSArray *files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:&error];
+    NSArray *files = nil;
+    
+    if (skipHiddenFile) {
+        
+        NSURL *fileURL = [NSURL fileURLWithPath:path];
+        files = [[NSFileManager defaultManager] contentsOfDirectoryAtURL:fileURL includingPropertiesForKeys:@[NSURLNameKey] options:NSDirectoryEnumerationSkipsHiddenFiles error:&error];
+        
+    } else {
+        
+        files = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:path error:&error];
+        
+    }
     
     if (error != nil) {
         NSLog(@"%s **Error**: %@", __func__, error);
