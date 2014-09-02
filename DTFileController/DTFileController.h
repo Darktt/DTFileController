@@ -207,6 +207,14 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
 
 // Create File Or Directory
 
+/** @brief Create the directory at given path.
+ *
+ * @param path The path to create empty file.
+ *
+ * @return YES is directory create succeed. NO is otherwise.
+ */
+- (BOOL)createDirectoryAtPath:(NSString *)path;
+
 /** @brief Create the directory under document directory with given name.
  *
  * @param directory The directory name to create.

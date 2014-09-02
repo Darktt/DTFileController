@@ -304,6 +304,28 @@ static DTFileController *singleton = nil;
 
 #pragma mark - Create File Or Directory
 
+- (BOOL)createDirectoryAtPath:(NSString *)path
+{
+    NSError *error = nil;
+    
+    // If file already exist, abort it.
+    if ([self fileExistAtPath:path]) {
+        return NO;
+    }
+    
+    if (![[NSFileManager defaultManager] createDirectoryAtPath:path
+                                   withIntermediateDirectories:NO
+                                                    attributes:nil
+                                                         error:&error]) {
+        NSLog(@"%s **Error**: %@", __func__, error);
+        
+        // Create failed
+        return NO;
+    }
+    
+    return YES;
+}
+
 - (BOOL)createDirectoryUnderDocumentWithDirectoryName:(NSString *)directory
 {
     
@@ -329,28 +351,6 @@ static DTFileController *singleton = nil;
 #endif
     
     return [self createDirectoryAtPath:folderPathUnderCaches];
-}
-
-- (BOOL)createDirectoryAtPath:(NSString *)path
-{
-    NSError *error = nil;
-    
-    // If file already exist, abort it.
-    if ([self fileExistAtPath:path]) {
-        return NO;
-    }
-    
-    if (![[NSFileManager defaultManager] createDirectoryAtPath:path
-                                   withIntermediateDirectories:NO
-                                                    attributes:nil
-                                                         error:&error]) {
-        NSLog(@"%s **Error**: %@", __func__, error);
-        
-        // Create failed
-        return NO;
-    }
-    
-    return YES;
 }
 
 - (BOOL)createFile:(NSString *)fileName directoryUnderDocument:(NSString *)directory
