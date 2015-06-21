@@ -22,6 +22,8 @@
 #define DTInstancetype id
 #endif
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DTFileAttribute : NSObject
 
 @property (nonatomic, readonly) NSString *fileName;
@@ -37,3 +39,5 @@
 - (DTInstancetype)initWithURL:(NSURL *)fileURL;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -18,6 +18,8 @@
 
 @class ALAsset;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface DTFileController (ALAssetsLibrary)
 
 /** @brief Copy photo or video asset to destination path from camera roll, With the process progress.
@@ -32,7 +34,9 @@
  */
 - (void)copyAsset:(ALAsset *)asset
   destinationPath:(NSString *)destPath
-    progressBlock:(DTFileProgressBlock)progressBlock
-    completeBlock:(DTFileOperationBlock)completeBlock;
+    progressBlock:(DTFileProgressBlock __nullable)progressBlock
+    completeBlock:(DTFileOperationBlock __nullable)completeBlock;
 
 @end
+
+NS_ASSUME_NONNULL_END

@@ -161,7 +161,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The string data of the text file, if file exist. nil is otherwise.
  */
-- (NSString *)readStringFromPath:(NSString *)filePath;
+- (NSString * __nullable)readStringFromPath:(NSString *)filePath;
 
 /** @brief Read property list file to array data from given path.
  *
@@ -169,7 +169,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The array data of the property list file, if file exist. nil is otherwise.
  */
-- (NSArray *)readArrayFromPath:(NSString *)filePath;
+- (NSArray * __nullable)readArrayFromPath:(NSString *)filePath;
 
 /** @brief Read property list file to dictionary data from given path.
  *
@@ -177,7 +177,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The dictionary data of the property list file, if file exist. nil is otherwise.
  */
-- (NSDictionary *)readDictionaryFromFilePath:(NSString *)filePath;
+- (NSDictionary * __nullable)readDictionaryFromFilePath:(NSString *)filePath;
 
 // Write Data
 
@@ -241,7 +241,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return YES is directory create succeed. NO is otherwise.
  */
-- (BOOL)createFile:(NSString *)fileName directoryUnderDocument:(NSString *)directory;
+- (BOOL)createFile:(NSString *)fileName directoryUnderDocument:(NSString * __nullable)directory;
 
 /** @brief Create the empty file at given path.
  *

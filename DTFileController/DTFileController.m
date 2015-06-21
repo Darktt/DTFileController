@@ -313,23 +313,20 @@ static DTFileController *singleton = nil;
         return NO;
     }
     
-    if (![[NSFileManager defaultManager] createDirectoryAtPath:path
-                                   withIntermediateDirectories:NO
-                                                    attributes:nil
-                                                         error:&error]) {
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    BOOL success = [fileManager createDirectoryAtPath:path withIntermediateDirectories:NO attributes:nil error:&error];
+    
+    if (!success) {
         NSLog(@"%s **Error**: %@", __func__, error);
-        
-        // Create failed
-        return NO;
     }
     
-    return YES;
+    return success;
 }
 
 - (BOOL)createDirectoryUnderDocumentWithDirectoryName:(NSString *)directory
 {
     
-    NSString *folderPathUnderDocument = [[self documentPath] stringByAppendingPathComponent:directory];
+    NSString *folderPathUnderDocument = [self documentPathWithFileName:directory];
     
 #ifdef DEBUG_MODE
     
@@ -342,7 +339,7 @@ static DTFileController *singleton = nil;
 
 - (BOOL)createDirectoryUnderCachesWithDirectoryName:(NSString *)directory;
 {
-    NSString *folderPathUnderCaches = [[self cachesPath] stringByAppendingPathComponent:directory];
+    NSString *folderPathUnderCaches = [self cachesPathWithFileName:directory];
     
 #ifdef DEBUG_MODE
     
@@ -357,26 +354,18 @@ static DTFileController *singleton = nil;
 {
     if (directory == nil || [directory isEqualToString:@""]) {
         
-        NSString *localFilePath = [[self documentPath] stringByAppendingPathComponent:fileName];
+        NSString *path = [self documentPathWithFileName:fileName];
         
 #ifdef DEBUG_MODE
         
         NSLog(@"File Path: %@",localFilePath);
         
 #endif
-        
-        // If file already exist, abort it.
-        if ([self fileExistAtPath:localFilePath]) {
-            return NO;
-        }
-        
-        [self createFileWithPath:localFilePath];
-        
-        // Check cteate file is complete
-        return [self fileExistAtPath:localFilePath];
+        return [self createFileWithPath:path];
     }
     
-    NSString *path = [self documentPathWithFileName:[directory stringByAppendingPathComponent:fileName]];
+    NSString *combinePath = [directory stringByAppendingPathComponent:fileName];
+    NSString *path = [self documentPathWithFileName:combinePath];
     
 #ifdef DEBUG_MODE
     
@@ -384,16 +373,12 @@ static DTFileController *singleton = nil;
     
 #endif
     
-    // If file already exist, abort it.
-    if ([self fileExistAtPath:path]) {
-        return NO;
-    }
+    BOOL successCreate = [self createDirectoryUnderDocumentWithDirectoryName:directory];
     
-    if ([self createDirectoryUnderDocumentWithDirectoryName:directory]) {
-        [self createFileWithPath:path];
+    if (successCreate) {
         
         // Check cteate file is complete
-        return [self fileExistAtPath:path];
+        return [self createFileWithPath:path];
     }
     
     return NO;

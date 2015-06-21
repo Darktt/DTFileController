@@ -34,7 +34,10 @@
     CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, (CFDictionaryRef)options);
     CFRelease(imageSource);
     
-    return [(NSDictionary *)imageProperties autorelease];
+    NSDictionary *_imageProperties = (NSDictionary *)imageProperties;
+    CFRelease(imageProperties);
+    
+    return _imageProperties;
 }
 
 - (NSDictionary *)EXIFInformationWithPath:(NSString *)path
