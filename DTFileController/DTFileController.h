@@ -1,13 +1,13 @@
 // DTFileController.h
-// 
-// Copyright (c) 2013年 Darktt
+//
+// Copyright (c) 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
-// 
+//
 //   http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -22,8 +22,11 @@
 #define DTInstancetype id
 #endif
 
+
+NS_ASSUME_NONNULL_BEGIN
+
 typedef void (^DTFileProgressBlock) (float progress);
-typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
+typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable error);
 
 /// Collection all about file control medthods.
 @interface DTFileController : NSObject
@@ -207,6 +210,14 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
 
 // Create File Or Directory
 
+/** @brief Create the directory at given path.
+ *
+ * @param path The path to create empty file.
+ *
+ * @return YES is directory create succeed. NO is otherwise.
+ */
+- (BOOL)createDirectoryAtPath:(NSString *)path;
+
 /** @brief Create the directory under document directory with given name.
  *
  * @param directory The directory name to create.
@@ -306,8 +317,8 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
  */
 - (void)copyFileUseBlockAtPath:(NSString *)path
                         toPath:(NSString *)toPath
-                 progressBlock:(DTFileProgressBlock)progressBlock
-                 completeBlock:(DTFileOperationBlock)completeBlock;
+                 progressBlock:(DTFileProgressBlock __nullable)progressBlock
+                 completeBlock:(DTFileOperationBlock __nullable)completeBlock;
 
 // Move File
 
@@ -338,8 +349,8 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
  */
 - (void)moveFileUseBlockAtPath:(NSString *)path
                         toPath:(NSString *)toPath
-                 progressBlock:(DTFileProgressBlock)progressBlock
-                 completeBlock:(DTFileOperationBlock)completeBlock;
+                 progressBlock:(DTFileProgressBlock __nullable)progressBlock
+                 completeBlock:(DTFileOperationBlock __nullable)completeBlock;
 
 // Get File Infomation
 
@@ -404,6 +415,15 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
  */
 - (NSString *)getFileModificationDateAtPath:(NSString *)path dateFormat:(NSString *)format;
 
+/** @brief Check the path of file is directory type.
+ *
+ * @param path The file path to check type.
+ *
+ * @return YES, When the type is directory.
+ *
+ */
+- (BOOL)isDirectoryWithPath:(NSString *)path;
+
 // Convert File Size
 
 /** @brief Convert the size unit for given size.
@@ -415,3 +435,4 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *error);
 - (NSString *)convertFileSizeWithSize:(NSNumber *)fileSize;
 
 @end
+NS_ASSUME_NONNULL_END
