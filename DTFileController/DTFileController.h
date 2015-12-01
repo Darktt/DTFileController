@@ -1,6 +1,6 @@
 // DTFileController.h
 //
-// Copyright (c) 2013 Darktt
+// Copyright © 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #if __has_feature(objc_instancetype)
 #define DTInstancetype instancetype
 #else
 #define DTInstancetype id
 #endif
-
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -47,7 +46,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)checkFileNameLegallyWithFileName:(NSString *)fileName;
 
-// Check file is exist
+#pragma mark - Check file is exist
 
 /** @brief Check file is exist from file path.
  *
@@ -69,7 +68,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)fileExistAtURL:(NSURL *)url;
 
-// Check Free Space
+#pragma mark - Check Free Space
 
 /** @brief Get the free space of current device.
  *
@@ -95,7 +94,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)checkSpaceEnoughWithFileSize:(NSNumber *)size;
 
-// Get Path
+#pragma mark - Get Path
 
 /** @brief Get the application's directory path.
  *
@@ -153,7 +152,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (NSString *)temporaryPath;
 
-// Read Data
+#pragma mark - Read Data
 
 /** @brief Read text file to string data from given path.
  *
@@ -177,9 +176,9 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The dictionary data of the property list file, if file exist. nil is otherwise.
  */
-- (NSDictionary * __nullable)readDictionaryFromFilePath:(NSString *)filePath;
+- (NSDictionary<NSString *, id> * __nullable)readDictionaryFromFilePath:(NSString *)filePath;
 
-// Write Data
+#pragma mark - Write Data
 
 /** @brief Write string data to text file.
  *
@@ -197,7 +196,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The write array data to file, if file not exist will create it. if file exist will overwrite.
  */
-- (void)writeArrayFile:(NSArray *)array withFilePath:(NSString *)filePath;
+- (void)writeArrayFile:(NSArray<NSString *> *)array withFilePath:(NSString *)filePath;
 
 /** @brief Write dictionary data to text file.
  *
@@ -206,9 +205,9 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The write dictionary data to file, if file not exist will create it. if file exist will overwrite.
  */
-- (void)writeDictionaryToFile:(NSDictionary *)dictionary withFilePath:(NSString *)filePath;
+- (void)writeDictionaryToFile:(NSDictionary<NSString *, NSString *> *)dictionary withFilePath:(NSString *)filePath;
 
-// Create File Or Directory
+#pragma mark - Create File Or Directory
 
 /** @brief Create the directory at given path.
  *
@@ -251,7 +250,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)createFileWithPath:(NSString *)path;
 
-// Get File List
+#pragma mark - Get File List
 
 /** @brief Get file list on current project directory.
  *
@@ -259,7 +258,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The listed files array, the files only file name not full file path.
  */
-- (NSArray *)filesOfCurrentDirectoryName:(NSString *)directoryName;
+- (NSArray<NSString *> *)filesOfCurrentDirectoryName:(NSString *)directoryName;
 
 /** @brief Get file list on given path.
  *
@@ -267,7 +266,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The listed files array, the files only file name not full file path.
  */
-- (NSArray *)filesWithDirectoryPath:(NSString *)path;
+- (NSArray<NSString *> *)filesWithDirectoryPath:(NSString *)path;
 
 /** @brief Convert the files to combine the path.
  *
@@ -276,9 +275,9 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The combined path array.
  */
-- (NSArray *)convertFullPathWithFiles:(NSArray *)files path:(NSString *)path;
+- (NSArray<NSString *> *)convertFullPathWithFiles:(NSArray<NSString *> *)files path:(NSString *)path;
 
-// Remove File
+#pragma mark - Remove File
 
 /** @brief Remove file on given path.
  *
@@ -288,7 +287,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)removeFileAtPath:(NSString *)path;
 
-// Copy File
+#pragma mark - Copy File
 
 /** @brief Copy file to destination path, Without the process progress.
  *
@@ -317,10 +316,10 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (void)copyFileUseBlockAtPath:(NSString *)path
                         toPath:(NSString *)toPath
-                 progressBlock:(DTFileProgressBlock __nullable)progressBlock
-                 completeBlock:(DTFileOperationBlock __nullable)completeBlock;
+                 progressBlock:(nullable DTFileProgressBlock)progressBlock
+                 completeBlock:(nullable DTFileOperationBlock)completeBlock;
 
-// Move File
+#pragma mark - Move File
 
 /** @brief Move file to destination path, Without the process progress.
  *
@@ -352,7 +351,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
                  progressBlock:(DTFileProgressBlock __nullable)progressBlock
                  completeBlock:(DTFileOperationBlock __nullable)completeBlock;
 
-// Get File Infomation
+#pragma mark - Get File Infomation
 
 /** @brief Get the file information for given path.
  *
@@ -360,7 +359,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The information dictionary.
  */
-- (NSDictionary *)getFileInformationAtPath:(NSString *)path;
+- (NSDictionary<NSString *, id> *)getFileInformationAtPath:(NSString *)path;
 
 /** @brief Get the file size for given path.
  *
@@ -424,7 +423,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)isDirectoryWithPath:(NSString *)path;
 
-// Convert File Size
+#pragma mark - Convert File Size
 
 /** @brief Convert the size unit for given size.
  *

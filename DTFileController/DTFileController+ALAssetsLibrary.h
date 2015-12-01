@@ -1,6 +1,6 @@
 // DTFileController+AssetsLibrary.h
 //
-// Copyright (c) 2013 Darktt
+// Copyright © 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -19,7 +19,6 @@
 @class ALAsset;
 
 NS_ASSUME_NONNULL_BEGIN
-
 @interface DTFileController (ALAssetsLibrary)
 
 /** @brief Copy photo or video asset to destination path from camera roll, With the process progress.
@@ -34,9 +33,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)copyAsset:(ALAsset *)asset
   destinationPath:(NSString *)destPath
-    progressBlock:(DTFileProgressBlock __nullable)progressBlock
-    completeBlock:(DTFileOperationBlock __nullable)completeBlock;
+    progressBlock:(nullable DTFileProgressBlock)progressBlock
+    completeBlock:(nullable DTFileOperationBlock)completeBlock;
 
 @end
-
 NS_ASSUME_NONNULL_END

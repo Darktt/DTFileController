@@ -1,6 +1,6 @@
 // DTFileController.m
 //
-// Copyright (c) 2013 Darktt
+// Copyright © 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,8 +17,6 @@
 //#define DEBUG_MODE
 
 #import "DTFileController.h"
-
-typedef void (^QueueBlock) (void);
 
 @implementation DTFileController
 
@@ -471,13 +469,21 @@ static DTFileController *singleton = nil;
 {
     // If destination path same to origin path, abort it.
     if ([path isEqualToString:toPath]) {
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"Source file same as destination file."};
+        
+        NSError *error = [NSError errorWithDomain:@"com.darktt.DTFileController" code:NSFileReadNoSuchFileError userInfo:userInfo];
+        
+        if (completeBlock != nil) completeBlock(NO, error);
+        
         return;
     }
     
     NSFileHandle *sourceFile = [NSFileHandle fileHandleForReadingAtPath:path];
     
     if (sourceFile == nil) {
-        NSError *error = [NSError errorWithDomain:@"Source file not exist!!" code:NSFileReadNoSuchFileError userInfo:nil];
+        NSDictionary *userInfo = @{NSLocalizedDescriptionKey: @"Source file not exist!!"};
+        
+        NSError *error = [NSError errorWithDomain:@"com.darktt.DTFileController" code:NSFileReadNoSuchFileError userInfo:userInfo];
         
         if (completeBlock != nil) completeBlock(NO, error);
     }
@@ -496,11 +502,11 @@ static DTFileController *singleton = nil;
         destinationFile = [NSFileHandle fileHandleForWritingAtPath:toPath];
     }
     
-    QueueBlock copyQueueBlock = ^(){
+    dispatch_block_t copyQueueBlock = ^(){
         
         NSUInteger offset = 0;
         NSUInteger chunkSize = 1024 * 100;
-        long long size = [[self getFileInformationAtPath:path] fileSize];
+        unsigned long long size = [[self getFileInformationAtPath:path] fileSize];
         
         do {
             

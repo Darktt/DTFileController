@@ -1,6 +1,6 @@
 //  DTFileAttribute.h
 //
-// Copyright (c) 2013 Darktt
+// Copyright © 2013 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 
 #if __has_feature(objc_instancetype)
 #define DTInstancetype instancetype

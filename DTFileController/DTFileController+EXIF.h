@@ -1,6 +1,6 @@
 //  DTFileController+EXIF.h
 //
-// Copyright (c) 2014 Darktt
+// Copyright © 2014 Darktt
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -17,7 +17,6 @@
 #import "DTFileController.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
 @interface DTFileController (EXIF)
 
 /**
@@ -40,5 +39,4 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)EXIFInformationWithPath:(NSString *)path;
 
 @end
-
 NS_ASSUME_NONNULL_END
