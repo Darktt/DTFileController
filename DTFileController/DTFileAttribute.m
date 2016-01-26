@@ -29,21 +29,21 @@
 
 @implementation DTFileAttribute
 
-+ (DTInstancetype)fileAttributeWithPath:(NSString *)filePath
++ (instancetype)fileAttributeWithPath:(NSString *)filePath
 {
     DTFileAttribute *attribute = [[DTFileAttribute alloc] initWithPath:filePath];
     
     return [attribute autorelease];
 }
 
-+ (DTInstancetype)fileAttributeWithURL:(NSURL *)fileURL
++ (instancetype)fileAttributeWithURL:(NSURL *)fileURL
 {
     DTFileAttribute *attribute = [[DTFileAttribute alloc] initWithURL:fileURL];
     
     return [attribute autorelease];
 }
 
-- (DTInstancetype)initWithPath:(NSString *)filePath
+- (instancetype)initWithPath:(NSString *)filePath
 {
     self = [super init];
     
@@ -56,7 +56,7 @@
     return self;
 }
 
-- (DTInstancetype)initWithURL:(NSURL *)fileURL
+- (instancetype)initWithURL:(NSURL *)fileURL
 {
     self = [super init];
     

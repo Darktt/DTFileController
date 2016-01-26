@@ -16,12 +16,6 @@
 
 @import Foundation;
 
-#if __has_feature(objc_instancetype)
-#define DTInstancetype instancetype
-#else
-#define DTInstancetype id
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
 typedef void (^DTFileProgressBlock) (float progress);
@@ -35,7 +29,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return The singleton of object.
  *
  */
-+ (DTInstancetype)mainController;
++ (instancetype)mainController;
 
 /** @brief Check new file name is legally.
  *

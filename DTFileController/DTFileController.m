@@ -22,7 +22,7 @@
 
 static DTFileController *singleton = nil;
 
-+ (DTInstancetype)mainController
++ (instancetype)mainController
 {
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{

@@ -19,32 +19,42 @@
 #import <ImageIO/CGImageSource.h>
 #import <ImageIO/CGImageProperties.h>
 
-// This catagory using AssetsLibrary framework, if not used, please comment it.
+// This catagory using ImageIO framework, if not used, please comment it.
 #define UES_IMAGEIO_FRAMEWORK
+
+static CFDictionaryRef GetImagePropertysWithPath(CFURLRef pathURL) {
+    CGImageSourceRef imageSource = CGImageSourceCreateWithURL(pathURL, NULL);
+    
+    const void *keys[1] = {kCGImageSourceShouldCache};
+    const void *values[1] = {kCFBooleanTrue};
+    
+    CFDictionaryRef options = CFDictionaryCreate(kCFAllocatorDefault, keys, values, 1, NULL, NULL);
+    
+    CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, options);
+    CFRelease(imageSource);
+    CFRelease(options);
+    
+    return CFAutorelease(imageProperties);
+}
 
 @implementation DTFileController (EXIF)
 
 - (NSDictionary *)imagePropertiesWithPath:(NSString *)path
 {
     NSURL *imageFileURL = [NSURL fileURLWithPath:path];
-    CGImageSourceRef imageSource = CGImageSourceCreateWithURL((CFURLRef)imageFileURL, NULL);
     
-    NSDictionary *options = @{(id)kCGImageSourceShouldCache: @(NO)};
+    NSDictionary *imageProperties = (NSDictionary *)GetImagePropertysWithPath((CFURLRef)imageFileURL);
     
-    CFDictionaryRef imageProperties = CGImageSourceCopyPropertiesAtIndex(imageSource, 0, (CFDictionaryRef)options);
-    CFRelease(imageSource);
-    
-    NSDictionary *_imageProperties = (NSDictionary *)imageProperties;
-    CFRelease(imageProperties);
-    
-    return _imageProperties;
+    return imageProperties;
 }
 
 - (NSDictionary *)EXIFInformationWithPath:(NSString *)path
 {
     NSDictionary *imageProperties = [self imagePropertiesWithPath:path];
     
-    NSDictionary *EXIF = imageProperties[(id)kCGImagePropertyExifDictionary];
+    NSString *exifDictionaryKey = (NSString *)kCGImagePropertyExifDictionary;
+    
+    NSDictionary *EXIF = imageProperties[exifDictionaryKey];
     
     return EXIF;
 }

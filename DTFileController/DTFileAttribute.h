@@ -16,12 +16,6 @@
 
 @import Foundation;
 
-#if __has_feature(objc_instancetype)
-#define DTInstancetype instancetype
-#else
-#define DTInstancetype id
-#endif
-
 NS_ASSUME_NONNULL_BEGIN
 
 @interface DTFileAttribute : NSObject
@@ -32,11 +26,11 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSDate *fileCreationDate;
 @property (nonatomic, readonly) NSDate *fileModificationDate;
 
-+ (DTInstancetype)fileAttributeWithPath:(NSString *)filePath;
-+ (DTInstancetype)fileAttributeWithURL:(NSURL *)fileURL;
++ (instancetype)fileAttributeWithPath:(NSString *)filePath;
++ (instancetype)fileAttributeWithURL:(NSURL *)fileURL;
 
-- (DTInstancetype)initWithPath:(NSString *)filePath;
-- (DTInstancetype)initWithURL:(NSURL *)fileURL;
+- (instancetype)initWithPath:(NSString *)filePath;
+- (instancetype)initWithURL:(NSURL *)fileURL;
 
 @end
 
