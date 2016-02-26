@@ -49,7 +49,7 @@
     
     if (self == nil) return nil;
     
-    _filePath = [filePath retain];
+    _filePath = [NSString stringWithString:filePath];
     
     _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:_filePath];
     
@@ -70,15 +70,13 @@
     
     _fileURL = [fileURL retain];
     
-    _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:[_fileURL path]];
+    _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:_fileURL.path];
     
     return self;
 }
 
 - (void)dealloc
 {
-    [super dealloc];
-    
     if (_filePath != nil) {
         [_filePath release];
         _filePath = nil;
@@ -90,6 +88,8 @@
     }
     
     [_fileAttribute release];
+    
+    [super dealloc];
 }
 
 #pragma mark - Override Porperty
