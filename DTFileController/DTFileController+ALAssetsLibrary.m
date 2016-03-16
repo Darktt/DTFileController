@@ -1,6 +1,7 @@
+//
 // DTFileController+AssetsLibrary.m
 //
-// Copyright © 2013 Darktt
+// Copyright © 2013 Darktt Personal Company. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -16,19 +17,14 @@
 
 #import "DTFileController+ALAssetsLibrary.h"
 
-#import <AssetsLibrary/AssetsLibrary.h>
+@import AssetsLibrary;
 
 //#define DEBUG_MODE
-
-// This catagory using AssetsLibrary framework, if not used, please comment it.
-#define UES_ASSETSLIBRARY_FRAMEWORK
 
 @implementation DTFileController (ALAssetsLibrary)
 
 - (void)copyAsset:(ALAsset *)asset destinationPath:(NSString *)destPath progressBlock:(DTFileProgressBlock)progressBlock completeBlock:(DTFileOperationBlock)completeBlock
 {
-#ifdef UES_ASSETSLIBRARY_FRAMEWORK
-    
     ALAssetRepresentation *representation = [asset defaultRepresentation];
     
     // Change path extension to lowercase.
@@ -130,8 +126,6 @@
     });
     
     dispatch_release(assetCopyQueue);
-    
-#endif
 }
 
 @end

@@ -1,6 +1,7 @@
+//
 //  DTFileAttribute.m
 //
-// Copyright © 2013 Darktt
+// Copyright © 2013 Darktt Personal Company. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -49,9 +50,10 @@
     
     if (self == nil) return nil;
     
-    _filePath = [NSString stringWithString:filePath];
+    _filePath = [[NSString alloc] initWithString:filePath];
     
     _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:_filePath];
+    [_fileAttribute retain];
     
     return self;
 }
@@ -70,7 +72,8 @@
     
     _fileURL = [fileURL retain];
     
-    _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:_fileURL.path];
+    _fileAttribute = [[DTFileController mainController] getFileInformationAtPath:[_fileURL path]];
+    [_fileAttribute retain];
     
     return self;
 }

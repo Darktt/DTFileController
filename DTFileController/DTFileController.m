@@ -1,6 +1,7 @@
+//
 // DTFileController.m
 //
-// Copyright © 2013 Darktt
+// Copyright © 2013 Darktt Personal Company. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -488,10 +489,9 @@ static DTFileController *singleton = nil;
         if (completeBlock != nil) completeBlock(NO, error);
     }
     
-    NSString *fileName = [path lastPathComponent];
-    NSRange searchRange = [toPath rangeOfString:fileName options:NSCaseInsensitiveSearch];
-    
-    if (searchRange.location == NSNotFound) {
+    if ([self isDirectoryWithPath:toPath]) {
+        NSString *fileName = [path lastPathComponent];
+        
         toPath = [toPath stringByAppendingPathComponent:fileName];
     }
     
@@ -665,6 +665,15 @@ static DTFileController *singleton = nil;
     NSString *fileType = [[self getFileInformationAtPath:path] fileType];
     
     return [fileType isEqualToString:NSFileTypeDirectory];
+}
+
+- (BOOL)isDirectoryWithURL:(NSURL *)url
+{
+    if (![url isFileURL]) {
+        [NSException raise:NSInvalidArgumentException format:@"%@-line %d: URL pattern error, not file URL", [self class], __LINE__];
+    }
+    
+    return [self isDirectoryWithPath:url.path];
 }
 
 #pragma mark - Convert File Size

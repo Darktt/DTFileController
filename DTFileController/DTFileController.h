@@ -1,6 +1,7 @@
+//
 // DTFileController.h
 //
-// Copyright © 2013 Darktt
+// Copyright © 2013 Darktt Personal Company. All rights reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -53,7 +54,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 
 /** @brief Check file is exist from file path url.
  *
- * @param path The file path of NSURL type.
+ * @param url The file path of NSURL type.
  *
  * @warning The URL must use file scheme.
  *
@@ -416,6 +417,15 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  */
 - (BOOL)isDirectoryWithPath:(NSString *)path;
+
+/**
+ *  @brief Check the path of file is directory type.
+ *
+ *  @param url The file url to check type.
+ *
+ *  @return YES, When the type is directory.
+ */
+- (BOOL)isDirectoryWithURL:(NSURL *)url;
 
 #pragma mark - Convert File Size
 
