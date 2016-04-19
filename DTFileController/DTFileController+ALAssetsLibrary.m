@@ -23,6 +23,8 @@
 
 @implementation DTFileController (ALAssetsLibrary)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
 - (void)copyAsset:(ALAsset *)asset destinationPath:(NSString *)destPath progressBlock:(DTFileProgressBlock)progressBlock completeBlock:(DTFileOperationBlock)completeBlock
 {
     ALAssetRepresentation *representation = [asset defaultRepresentation];
@@ -128,4 +130,5 @@
     dispatch_release(assetCopyQueue);
 }
 
+#pragma clang diagnostic pop
 @end
