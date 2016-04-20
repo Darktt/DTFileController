@@ -50,7 +50,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return If file is exist, return YES, NO if not exist.
  *
  */
-- (BOOL)fileExistAtPath:(NSString *)path;
+- (BOOL)fileExistAtPath:(NSString *)path NS_SWIFT_NAME(fileExist(_:));
 
 /** @brief Check file is exist from file path url.
  *
@@ -61,7 +61,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return If file is exist, return YES, NO otherwise.
  *
  */
-- (BOOL)fileExistAtURL:(NSURL *)url;
+- (BOOL)fileExistAtURL:(NSURL *)url NS_SWIFT_NAME(fileExist(_:));
 
 #pragma mark - Check Free Space
 
