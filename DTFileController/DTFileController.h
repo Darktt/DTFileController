@@ -39,7 +39,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return NO, the file name is illegally; YES is legally.
  *
  */
-- (BOOL)checkFileNameLegallyWithFileName:(NSString *)fileName;
+- (BOOL)checkFileNameLegallyWithFileName:(NSString *)fileName NS_SWIFT_NAME(checkFileNameLegally(fileName:));
 
 #pragma mark - Check file is exist
 
@@ -50,7 +50,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return If file is exist, return YES, NO if not exist.
  *
  */
-- (BOOL)fileExistAtPath:(NSString *)path NS_SWIFT_NAME(fileExist(_:));
+- (BOOL)fileExistAtPath:(NSString *)path NS_SWIFT_NAME(fileExist(atPath:));
 
 /** @brief Check file is exist from file path url.
  *
@@ -61,7 +61,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return If file is exist, return YES, NO otherwise.
  *
  */
-- (BOOL)fileExistAtURL:(NSURL *)url NS_SWIFT_NAME(fileExist(_:));
+- (BOOL)fileExistAtURL:(NSURL *)url NS_SWIFT_NAME(fileExist(atURL:));
 
 #pragma mark - Check Free Space
 
@@ -78,16 +78,16 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return YES, is enough to operation, NO is otherwise.
  *
  */
-- (BOOL)checkSpaceEnoughWithFilePath:(NSString *)path;
+- (BOOL)checkSpaceEnoughWithFilePath:(NSString *)path NS_SWIFT_NAME(checkSpaceEnough(withPath:));
 
 /** @brief Check the space is enough to operation from given size.
  *
- * @param path The path of file.
+ * @param size The size of file.
  *
  * @return YES, is enough to operation, NO is otherwise.
  *
  */
-- (BOOL)checkSpaceEnoughWithFileSize:(NSNumber *)size;
+- (BOOL)checkSpaceEnoughForFileSize:(NSNumber *)size NS_SWIFT_NAME(checkSpaceEnough(forFileSize:));
 
 #pragma mark - Get Path
 
@@ -105,7 +105,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return The path of application directory with file name. <br/> eg: /var/mobile/Applications/30E6D646-48FC-4AFF-B1A9-830DB765FA41/AppName.app/fileName.
  *
  */
-- (NSString *)currentApplicationPathWithFileName:(NSString *)fileName;
+- (NSString *)currentApplicationPathWithFileName:(NSString *)fileName NS_SWIFT_NAME(currentApplicationPath(withFileName:));
 
 /** @brief Get the document directory path under the application directory.
  *
@@ -119,7 +119,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The path of document directory.
  */
-- (NSString *)documentPathWithFileName:(NSString *)fileName;
+- (NSString *)documentPathWithFileName:(NSString *)fileName NS_SWIFT_NAME(documentPath(withFileName:));
 
 /** @brief Get the caches directory path under the application directory.
  *
@@ -133,7 +133,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The path of caches directory.
  */
-- (NSString *)cachesPathWithFileName:(NSString *)fileName;
+- (NSString *)cachesPathWithFileName:(NSString *)fileName NS_SWIFT_NAME(cachesPath(withFileName:));
 
 /** @brief Get the library directory path under the application directory.
  *
@@ -155,7 +155,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The string data of the text file, if file exist. nil is otherwise.
  */
-- (NSString * __nullable)readStringFromPath:(NSString *)filePath;
+- (NSString * __nullable)readStringFromPath:(NSString *)filePath NS_SWIFT_NAME(readString(path:));
 
 /** @brief Read property list file to array data from given path.
  *
@@ -163,7 +163,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The array data of the property list file, if file exist. nil is otherwise.
  */
-- (NSArray * __nullable)readArrayFromPath:(NSString *)filePath;
+- (NSArray * __nullable)readArrayFromPath:(NSString *)filePath NS_SWIFT_NAME(readArray(path:));
 
 /** @brief Read property list file to dictionary data from given path.
  *
@@ -171,7 +171,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The dictionary data of the property list file, if file exist. nil is otherwise.
  */
-- (NSDictionary<NSString *, id> * __nullable)readDictionaryFromFilePath:(NSString *)filePath;
+- (NSDictionary<NSString *, id> * __nullable)readDictionaryFromFilePath:(NSString *)filePath NS_SWIFT_NAME(readDictionary(path:));
 
 #pragma mark - Write Data
 
@@ -182,7 +182,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The write string data to file, if file not exist will create it. if file exist will overwrite.
  */
-- (void)writeStringFile:(NSString *)string withFilePath:(NSString *)filePath;
+- (void)writeStringToFile:(NSString *)string withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeStringToFile(_:withFilePath:));
 
 /** @brief Write array data to text file.
  *
@@ -191,7 +191,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The write array data to file, if file not exist will create it. if file exist will overwrite.
  */
-- (void)writeArrayFile:(NSArray<NSString *> *)array withFilePath:(NSString *)filePath;
+- (void)writeArrayToFile:(NSArray<NSString *> *)array withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeArrayToFile(_:withFilePath:));
 
 /** @brief Write dictionary data to text file.
  *
@@ -200,7 +200,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The write dictionary data to file, if file not exist will create it. if file exist will overwrite.
  */
-- (void)writeDictionaryToFile:(NSDictionary<NSString *, NSString *> *)dictionary withFilePath:(NSString *)filePath;
+- (void)writeDictionaryToFile:(NSDictionary<NSString *, NSString *> *)dictionary withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeDictionaryToFile(_:withFilePath:));
 
 #pragma mark - Create File Or Directory
 
@@ -218,7 +218,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return YES is directory create succeed. NO is otherwise.
  */
-- (BOOL)createDirectoryUnderDocumentWithDirectoryName:(NSString *)directory;
+- (BOOL)createDirectoryUnderDocumentWithDirectoryName:(NSString *)directory NS_SWIFT_NAME(createDirectoryUnderDocument(directoryName:));
 
 /** @brief Create the directory under caches directory with given name.
  *
@@ -226,7 +226,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return YES is directory create succeed. NO is otherwise.
  */
-- (BOOL)createDirectoryUnderCachesWithDirectoryName:(NSString *)directory;
+- (BOOL)createDirectoryUnderCachesWithDirectoryName:(NSString *)directory NS_SWIFT_NAME(createDirectoryUnderCaches(directoryName:));
 
 /** @brief Create the empty file in the directory under document directory.
  *
@@ -243,7 +243,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return YES is directory create succeed. NO is otherwise.
  */
-- (BOOL)createFileWithPath:(NSString *)path;
+- (BOOL)createFileWithPath:(NSString *)path NS_SWIFT_NAME(createFile(path:));
 
 #pragma mark - Get File List
 
@@ -253,7 +253,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The listed files array, the files only file name not full file path.
  */
-- (NSArray<NSString *> *)filesOfCurrentDirectoryName:(NSString *)directoryName;
+- (NSArray<NSString *> *)filesOfCurrentDirectoryName:(NSString *)directoryName NS_SWIFT_NAME(files(currentDirectoryName:));
 
 /** @brief Get file list on given path.
  *
@@ -261,7 +261,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The listed files array, the files only file name not full file path.
  */
-- (NSArray<NSString *> *)filesWithDirectoryPath:(NSString *)path;
+- (NSArray<NSString *> *)filesWithDirectoryPath:(NSString *)path NS_SWIFT_NAME(files(directoryPath:));
 
 /** @brief Convert the files to combine the path.
  *
@@ -270,7 +270,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The combined path array.
  */
-- (NSArray<NSString *> *)convertFullPathWithFiles:(NSArray<NSString *> *)files path:(NSString *)path;
+- (NSArray<NSString *> *)convertFullPathWithFiles:(NSArray<NSString *> *)files path:(NSString *)path NS_SWIFT_NAME(convertFullPath(files:path:));
 
 #pragma mark - Remove File
 
@@ -280,7 +280,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return YES is remove file succeed. NO is otherwise.
  */
-- (BOOL)removeFileAtPath:(NSString *)path;
+- (BOOL)removeFileAtPath:(NSString *)path NS_SWIFT_NAME(removeFile(path:));
 
 #pragma mark - Copy File
 
@@ -296,7 +296,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see copyFileUseBlockAtPath:toPath:progressBlock:completeBlock:
  */
-- (BOOL)copyFileAtPath:(NSString *)path toPath:(NSString *)toPath;
+- (BOOL)copyFileAtPath:(NSString *)path toPath:(NSString *)toPath NS_SWIFT_NAME(copyFile(path:toPath:));
 
 /** @brief Copy file to destination path, With the process progress.
  *
@@ -312,7 +312,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 - (void)copyFileUseBlockAtPath:(NSString *)path
                         toPath:(NSString *)toPath
                  progressBlock:(nullable DTFileProgressBlock)progressBlock
-                 completeBlock:(nullable DTFileOperationBlock)completeBlock;
+                 completeBlock:(nullable DTFileOperationBlock)completeBlock NS_SWIFT_NAME(copyFileUseBlock(path:toPath:progressBlock:completeBlock:));
 
 #pragma mark - Move File
 
@@ -328,7 +328,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see moveFileUseBlockAtPath:toPath:progressBlock:completeBlock:
  */
-- (BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath;
+- (BOOL)moveFileAtPath:(NSString *)path toPath:(NSString *)toPath NS_SWIFT_NAME(moveFile(path:toPath:));
 
 /** @brief Move file to destination path, With the process progress.
  *
@@ -344,7 +344,8 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 - (void)moveFileUseBlockAtPath:(NSString *)path
                         toPath:(NSString *)toPath
                  progressBlock:(DTFileProgressBlock __nullable)progressBlock
-                 completeBlock:(DTFileOperationBlock __nullable)completeBlock;
+                 completeBlock:(DTFileOperationBlock __nullable)completeBlock NS_SWIFT_NAME(moveFileUseBlock(path:toPath:progressBlock:completeBlock:));
+
 
 #pragma mark - Get File Infomation
 
@@ -354,7 +355,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The information dictionary.
  */
-- (NSDictionary<NSString *, id> *)getFileInformationAtPath:(NSString *)path;
+- (NSDictionary<NSString *, id> *)getFileInformationAtPath:(NSString *)path NS_SWIFT_NAME(getFileInformation(path:));
 
 /** @brief Get the file size for given path.
  *
@@ -365,7 +366,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see convertFileSizeWithSize:
  */
-- (NSString *)getFileSizeAtPath:(NSString *)path converSizeUnit:(BOOL)conver;
+- (NSString *)getFileSizeAtPath:(NSString *)path converSizeUnit:(BOOL)conver NS_SWIFT_NAME(getFileSize(path:converSizeUnit:));
 
 /** @brief Get the file creation date for given path.
  *
@@ -375,7 +376,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see getFileCreationDateAtPath:dateFormat:
  */
-- (NSDate *)getFileCreationDateAtPath:(NSString *)path;
+- (NSDate *)getFileCreationDateAtPath:(NSString *)path NS_SWIFT_NAME(getFileCreationDate(path:));
 
 /** @brief Get the file creation date for given path, and customize date format.
  *
@@ -386,7 +387,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see getFileCreationDateAtPath:
  */
-- (NSString *)getFileCreationDateAtPath:(NSString *)path dateFormat:(NSString *)format;
+- (NSString *)getFileCreationDateAtPath:(NSString *)path dateFormat:(NSString *)format NS_SWIFT_NAME(getFileCreationDate(path:dateFormat:));
 
 /** @brief Get the file modification date for given path.
  *
@@ -396,7 +397,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see getFileModificationDateAtPath:dateFormat:
  */
-- (NSDate *)getFileModificationDateAtPath:(NSString *)path;
+- (NSDate *)getFileModificationDateAtPath:(NSString *)path NS_SWIFT_NAME(getFileModificationDate(path:));
 
 /** @brief Get the file modification date for given path, and customize date format.
  *
@@ -407,7 +408,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @see getFileModificationDateAtPath:
  */
-- (NSString *)getFileModificationDateAtPath:(NSString *)path dateFormat:(NSString *)format;
+- (NSString *)getFileModificationDateAtPath:(NSString *)path dateFormat:(NSString *)format NS_SWIFT_NAME(getFileModificationDate(path:dateFormat:));
 
 /** @brief Check the path of file is directory type.
  *
@@ -416,7 +417,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return YES, When the type is directory.
  *
  */
-- (BOOL)isDirectoryWithPath:(NSString *)path;
+- (BOOL)isDirectoryWithPath:(NSString *)path NS_SWIFT_NAME(isDirectory(path:));
 
 /**
  *  @brief Check the path of file is directory type.
@@ -425,7 +426,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  *  @return YES, When the type is directory.
  */
-- (BOOL)isDirectoryWithURL:(NSURL *)url;
+- (BOOL)isDirectoryWithURL:(NSURL *)url NS_SWIFT_NAME(isDirectory(URL:));
 
 #pragma mark - Convert File Size
 
@@ -435,7 +436,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The converted file size.
  */
-- (NSString *)convertFileSizeWithSize:(NSNumber *)fileSize;
+- (NSString *)convertFileSizeWithSize:(NSNumber *)fileSize NS_SWIFT_NAME(convertFileSize(size:));
 
 @end
 NS_ASSUME_NONNULL_END

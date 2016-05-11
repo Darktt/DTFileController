@@ -28,7 +28,7 @@ NS_ASSUME_NONNULL_BEGIN
  *  @return The image property as NSDictionary object.
  *
  */
-- (NSDictionary *)imagePropertiesWithPath:(NSString *)path;
+- (NSDictionary *)imagePropertiesWithPath:(NSString *)path NS_SWIFT_NAME(imageProperties(path:));
 
 /**
  *  Get EXIF information from given path.
@@ -37,7 +37,7 @@ NS_ASSUME_NONNULL_BEGIN
  *
  *  @return nil, If not have EXIF information.
  */
-- (NSDictionary *)EXIFInformationWithPath:(NSString *)path;
+- (NSDictionary *)EXIFInformationWithPath:(NSString *)path NS_SWIFT_NAME(EXIFInformation(path:));
 
 @end
 NS_ASSUME_NONNULL_END

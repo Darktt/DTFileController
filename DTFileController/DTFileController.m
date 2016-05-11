@@ -115,7 +115,7 @@ static DTFileController *singleton = nil;
     return ([currentSpace longLongValue] > [fileSize longLongValue]);
 }
 
-- (BOOL)checkSpaceEnoughWithFileSize:(NSNumber *)size
+- (BOOL)checkSpaceEnoughForFileSize:(NSNumber *)size
 {
     NSNumber *currentSpace = [self checkStorageSpace];
     
@@ -265,7 +265,7 @@ static DTFileController *singleton = nil;
 
 #pragma mark - Write Data To File
 
-- (void)writeStringFile:(NSString *)string withFilePath:(NSString *)filePath
+- (void)writeStringToFile:(NSString *)string withFilePath:(NSString *)filePath
 {
     
 #ifdef DEBUG_MODE
@@ -277,7 +277,7 @@ static DTFileController *singleton = nil;
     [string writeToFile:filePath atomically:YES encoding:NSUTF8StringEncoding error:nil];
 }
 
-- (void)writeArrayFile:(NSArray *)array withFilePath:(NSString *)filePath
+- (void)writeArrayToFile:(NSArray *)array withFilePath:(NSString *)filePath
 {
     
 #ifdef DEBUG_MODE
