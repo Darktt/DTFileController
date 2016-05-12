@@ -44,7 +44,7 @@
     
     dispatch_queue_t assetCopyQueue = dispatch_queue_create("Copy Asset", NULL);
     dispatch_async(assetCopyQueue, ^(){
-        BOOL enoughSpace = [self checkSpaceEnoughWithFileSize:assetSize];
+        BOOL enoughSpace = [self checkSpaceEnoughForFileSize:assetSize];
         
         if (!enoughSpace) {
             dispatch_async(dispatch_get_main_queue(), ^(){
