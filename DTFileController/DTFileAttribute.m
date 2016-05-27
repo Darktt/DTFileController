@@ -99,11 +99,7 @@
 
 - (NSString *)fileName
 {
-    NSString *fileName = nil;
-    
-    if (_filePath != nil) {
-        fileName = [_filePath lastPathComponent];
-    }
+    NSString *fileName = [_filePath lastPathComponent];;
     
     if (_fileURL != nil) {
         fileName = [_fileURL lastPathComponent];
@@ -114,11 +110,7 @@
 
 - (NSString *)filePathExtension
 {
-    NSString *filePathExtension = nil;
-    
-    if (_filePath != nil) {
-        filePathExtension = [_filePath pathExtension];
-    }
+    NSString *filePathExtension = [_filePath pathExtension];;
     
     if (_fileURL != nil) {
         filePathExtension = [_fileURL pathExtension];
