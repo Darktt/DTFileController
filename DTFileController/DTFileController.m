@@ -506,7 +506,8 @@ static DTFileController *singleton = nil;
         
         NSUInteger offset = 0;
         NSUInteger chunkSize = 1024 * 100;
-        unsigned long long size = [[self getFileInformationAtPath:path] fileSize];
+        NSDictionary *fileInformations = [self getFileInformationAtPath:path];
+        unsigned long long size = [fileInformations fileSize];
         
         do {
             
@@ -607,7 +608,8 @@ static DTFileController *singleton = nil;
 
 - (NSString *)getFileSizeAtPath:(NSString *)path converSizeUnit:(BOOL)conver
 {
-    NSNumber *fileSize = [[self getFileInformationAtPath:path] objectForKey:NSFileSize];
+    NSDictionary *fileInformations = [self getFileInformationAtPath:path];
+    NSNumber *fileSize = fileInformations[NSFileSize];
     
     NSString *size = [fileSize stringValue];
     
@@ -622,7 +624,8 @@ static DTFileController *singleton = nil;
 
 - (NSDate *)getFileCreationDateAtPath:(NSString *)path
 {
-    NSDate *creationDate = [[self getFileInformationAtPath:path] fileCreationDate];
+    NSDictionary *fileInformations = [self getFileInformationAtPath:path];
+    NSDate *creationDate = [fileInformations fileCreationDate];
     
     return creationDate;
 }
@@ -643,7 +646,8 @@ static DTFileController *singleton = nil;
 
 - (NSDate *)getFileModificationDateAtPath:(NSString *)path
 {
-    NSDate *modificationDate = [[self getFileInformationAtPath:path] fileModificationDate];
+    NSDictionary *fileInformations = [self getFileInformationAtPath:path];
+    NSDate *modificationDate = [fileInformations fileModificationDate];
     
     return modificationDate;
 }
@@ -662,7 +666,8 @@ static DTFileController *singleton = nil;
 
 - (BOOL)isDirectoryWithPath:(NSString *)path
 {
-    NSString *fileType = [[self getFileInformationAtPath:path] fileType];
+    NSDictionary *fileInformations = [self getFileInformationAtPath:path];
+    NSString *fileType = [fileInformations fileType];
     
     return [fileType isEqualToString:NSFileTypeDirectory];
 }

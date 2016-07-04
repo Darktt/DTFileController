@@ -39,7 +39,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return NO, the file name is illegally; YES is legally.
  *
  */
-- (BOOL)checkFileNameLegallyWithFileName:(NSString *)fileName NS_SWIFT_NAME(checkFileNameLegally(fileName:));
+- (BOOL)checkFileNameLegallyWithFileName:(NSString *)fileName NS_SWIFT_NAME(checkFileNameLegally(withFileName:));
 
 #pragma mark - Check file is exist
 
@@ -355,7 +355,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  *
  * @return The information dictionary.
  */
-- (NSDictionary<NSString *, id> *)getFileInformationAtPath:(NSString *)path NS_SWIFT_NAME(getFileInformation(path:));
+- (nullable NSDictionary<NSString *, id> *)getFileInformationAtPath:(NSString *)path NS_SWIFT_NAME(getFileInformation(path:));
 
 /** @brief Get the file size for given path.
  *
@@ -437,6 +437,12 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return The converted file size.
  */
 - (NSString *)convertFileSizeWithSize:(NSNumber *)fileSize NS_SWIFT_NAME(convertFileSize(size:));
+
+@end
+
+@interface DTFileController (NSDeprecated)
+
+- (instancetype)init NS_UNAVAILABLE;
 
 @end
 NS_ASSUME_NONNULL_END
