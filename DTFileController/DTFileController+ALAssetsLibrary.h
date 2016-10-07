@@ -35,7 +35,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)copyAsset:(ALAsset *)asset
   destinationPath:(NSString *)destPath
     progressBlock:(nullable DTFileProgressBlock)progressBlock
-    completeBlock:(nullable DTFileOperationBlock)completeBlock;
+    completeBlock:(nullable DTFileOperationBlock)completeBlock NS_DEPRECATED_IOS(4_0, 9_0);
 
 @end
 NS_ASSUME_NONNULL_END
