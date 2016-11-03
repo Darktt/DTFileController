@@ -685,29 +685,9 @@ static DTFileController *singleton = nil;
 
 - (NSString *)convertFileSizeWithSize:(NSNumber *)fileSize
 {
-    double _fileSize = [fileSize longLongValue];
-    double baseSize = 0;
+    long long size = [fileSize longLongValue];
     
-    NSString *fileSizeString = nil;
-    NSArray *units = @[@"B", @"KB", @"MB", @"GB", @"TB", @"PB", @"EB", @"ZB", @"YB"];
-    NSUInteger times = 0;
-    
-    // When file size less then 1024 bytes, do this function.
-    if (_fileSize < pow(2, 10)) {
-        fileSizeString = [NSString stringWithFormat:@"%.1f %@", _fileSize, units[times]];
-        
-        return fileSizeString;
-    }
-    
-    // When file size greate then 1024 bytes.
-    do {
-        fileSizeString = [NSString stringWithFormat:@"%.1f %@", _fileSize / baseSize, units[times]];
-        
-        times += 1;
-        baseSize = pow(2, times * 10);
-    } while (_fileSize >= baseSize);
-    
-    return fileSizeString;
+    return [NSByteCountFormatter stringFromByteCount:size countStyle:NSByteCountFormatterCountStyleBinary];
 }
 
 @end

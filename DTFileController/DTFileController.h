@@ -363,7 +363,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 
 /** @brief Get the file size for given path.
  *
- * @param path The file path to get information.
+ * @param path The file path to get size.
  * @param conver The boolean value to conver the size unit or not.
  *
  * @return The file size.
