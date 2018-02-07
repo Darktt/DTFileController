@@ -184,7 +184,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @param string The string data will write to file.
  * @param filePath The path of file to write.
  *
- * @return The write string data to file, if file not exist will create it. if file exist will overwrite.
+ * @note The write string data to file, if file not exist will create it. if file exist will overwrite.
  */
 - (void)writeStringToFile:(NSString *)string withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeStringToFile(_:withFilePath:));
 
@@ -193,7 +193,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @param array The array data will write to file.
  * @param filePath The path of file to write.
  *
- * @return The write array data to file, if file not exist will create it. if file exist will overwrite.
+ * @note The write array data to file, if file not exist will create it. if file exist will overwrite.
  */
 - (void)writeArrayToFile:(NSArray<NSString *> *)array withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeArrayToFile(_:withFilePath:));
 
@@ -202,7 +202,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @param dictionary The dictionary data will write to file.
  * @param filePath The path of file to write.
  *
- * @return The write dictionary data to file, if file not exist will create it. if file exist will overwrite.
+ * @note The write dictionary data to file, if file not exist will create it. if file exist will overwrite.
  */
 - (void)writeDictionaryToFile:(NSDictionary<NSString *, NSString *> *)dictionary withFilePath:(NSString *)filePath NS_SWIFT_NAME(writeDictionaryToFile(_:withFilePath:));
 
@@ -385,7 +385,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 /** @brief Get the file creation date for given path, and customize date format.
  *
  * @param path The file path to get file creation date.
- * @param dateFormat The date format to convert textual representations of dates and times into NSDate objects.
+ * @param format The date format to convert textual representations of dates and times into NSDate objects.
  *
  * @return The converted creation date.
  *
@@ -406,7 +406,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 /** @brief Get the file modification date for given path, and customize date format.
  *
  * @param path The file path to get file modification date.
- * @param dateFormat The date format to convert textual representations of dates and times into NSDate objects.
+ * @param format The date format to convert textual representations of dates and times into NSDate objects.
  *
  * @return The converted modification date.
  *
@@ -450,3 +450,4 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
 
 @end
 NS_ASSUME_NONNULL_END
+
