@@ -30,7 +30,7 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  * @return The singleton of object.
  *
  */
-#if UIKIT_DEFINE_AS_PROPERTIES
+#ifdef UIKIT_DEFINE_AS_PROPERTIES
 @property (class, nonatomic, readonly) DTFileController* mainController NS_SWIFT_NAME(main);
 #else
 + (instancetype)mainController;
