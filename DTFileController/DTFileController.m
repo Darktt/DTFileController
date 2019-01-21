@@ -393,6 +393,44 @@ static DTFileController *singleton = nil;
     return [[NSFileManager defaultManager] createFileAtPath:path contents:nil attributes:nil];
 }
 
+#pragma mark - File Attribute Setting
+
+- (BOOL)isExcludedFromBackupWithPath:(NSString *)path error:(NSError * _Nullable *)error
+{
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    return [self isExcludedFromBackupWithUrl:url error:error];
+}
+
+- (BOOL)isExcludedFromBackupWithUrl:(NSURL *)url error:(NSError * _Nullable *)error
+{
+    NSURLResourceKey key = NSURLIsExcludedFromBackupKey;
+    NSDictionary<NSURLResourceKey, id> *resource = [url resourceValuesForKeys:@[key] error:error];
+    NSNumber *isExcludeBackup = resource[key];
+    
+    if (isExcludeBackup != nil) {
+        
+        return isExcludeBackup.boolValue;
+    }
+    
+    return NO;
+}
+
+#pragma mark - Change File Attribute
+
+- (void)setExcludeBackupAttribute:(BOOL)excluded atPath:(NSString *)path error:(NSError **)error
+{
+    NSURL *url = [NSURL fileURLWithPath:path];
+    
+    [self setExcludeBackupAttribute:excluded atUrl:url error:error];
+}
+
+- (void)setExcludeBackupAttribute:(BOOL)excluded atUrl:(NSURL *)url error:(NSError **)error
+{
+    NSURLResourceKey key = NSURLIsExcludedFromBackupKey;
+    [url setResourceValue:@(excluded) forKey:key error:error];
+}
+
 #pragma mark - Get File List In Directory
 
 - (NSArray *)filesOfCurrentDirectoryName:(NSString *)directoryName

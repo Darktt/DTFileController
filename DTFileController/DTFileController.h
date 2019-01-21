@@ -249,6 +249,48 @@ typedef void (^DTFileOperationBlock) (BOOL operationDone, NSError *__nullable er
  */
 - (BOOL)createFileWithPath:(NSString *)path NS_SWIFT_NAME(createFile(path:));
 
+#pragma mark - File Attribute Setting
+
+/** @brief Get directory or file is avoid backup from given path.
+ *
+ * @param path   A path to check is excluded backup.
+ * @param error  A NSError object, then failed to setup.
+ *
+ * @return Boolean value of is excluded or not.
+ */
+- (BOOL)isExcludedFromBackupWithPath:(NSString *)path error:(NSError * __nullable * __nullable)error;
+
+/** @brief Get directory or file is avoid backup from given file URL.
+ *
+ * @param url    A file path url to check is excluded backup.
+ * @param error  A NSError object, then failed to setup.
+ *
+ * @return Boolean value of is excluded or not.
+ */
+- (BOOL)isExcludedFromBackupWithUrl:(NSURL *)url error:(NSError * __nullable * __nullable)error;
+
+#pragma mark - Change File Attribute
+
+/** @brief Set directory or file path to avoid backup.
+ *
+ * @param exclued   A boolean value to set this directory want exclude backup or not.
+ * @param path      A path to add exclude.
+ * @param error     A NSError object, then failed to setup.
+ *
+ * @return YES is directory create succeed. NO is otherwise.
+ */
+- (void)setExcludeBackupAttribute:(BOOL)excluded atPath:(NSString *)path error:(NSError * __nullable * __nullable)error;
+
+/** @brief Set directory or file path of NSURL object to avoid backup.
+ *
+ * @param exclued   A boolean value to set this directory want exclude backup or not.
+ * @param url       A file path url to add exclude.
+ * @param error     A NSError object, then failed to setup.
+ *
+ * @return YES is directory create succeed. NO is otherwise.
+ */
+- (void)setExcludeBackupAttribute:(BOOL)excluded atUrl:(NSURL *)url error:(NSError * __nullable * __nullable)error;
+
 #pragma mark - Get File List
 
 /** @brief Get file list on current project directory.
